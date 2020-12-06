@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
 
 function FormularioCadastro() {
-  let nome="";
+  const [nome, setNome] = useState("");
+  const [sobrenome, setSobrenome] = useState("");
+
   return (
-    <form onSubmit={(event)=>{
-      event.preventDefault();
-      console.log(nome);
-    }}>
-      <TextField
-      onChange={event=>{
-        nome = event.target.value;
-        if(nome.length > 3){
-          nome = nome.substring(0,3);
-        }
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        console.log(nome + " " + sobrenome);
       }}
+    >
+      <TextField
+        value={nome}
+        onChange={(event) => {
+          let tmpNome = event.target.value;
+          if (tmpNome.length >= 3) {
+            tmpNome = tmpNome.substring(0, 3);
+          }
+          setNome(tmpNome);
+        }}
         fullWidth
         margin="normal"
         id="outlined-basic"
@@ -22,7 +28,12 @@ function FormularioCadastro() {
         color="secondary"
         variant="outlined"
       />
+
       <TextField
+        value={sobrenome}
+        onChange={(event) => {
+          setSobrenome(event.target.value);
+        }}
         fullWidth
         margin="normal"
         id="outlined-basic"
@@ -30,6 +41,7 @@ function FormularioCadastro() {
         color="secondary"
         variant="outlined"
       />
+
       <TextField
         fullWidth
         margin="normal"
@@ -41,8 +53,10 @@ function FormularioCadastro() {
 
       <FormControlLabel
         label="Promoções"
+        boxShadow={3}
         control={<Switch name="promocoes" defaultChecked />}
       />
+
       <FormControlLabel
         label="Novidades"
         control={<Switch name="novidades" defaultChecked />}
