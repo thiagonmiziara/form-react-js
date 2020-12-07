@@ -6,7 +6,7 @@ function FormularioCadastro({aoEnviar,validarCPF}) {
   
   return(
     <>
-    <DadosPessoais/>
+    <DadosPessoais aoEnviar={aoEnviar} validarCPF={validarCPF} />
     <DadosUsuario/>
     </>
   );
